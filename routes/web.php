@@ -26,9 +26,13 @@ Route::resource('scorders', App\Http\Controllers\scorderController::class);
 
 Route::resource('orderdetails', App\Http\Controllers\orderdetailController::class);
 
+Route::get('scorder/checkout', 'App\Http\Controllers\scorderController@checkout')->name('scorders.checkout');
 
 Route::get('product/displaygrid', 'App\Http\Controllers\productController@displaygrid')->name('products.displaygrid');
 
 Route::get('product/additem/{id}', 'App\Http\Controllers\productController@additem')->name('products.additem');
 
 Route::get('product/emptycart', 'App\Http\Controllers\productController@emptycart')->name('product.emptycart');
+
+Route::post('scorder/placeorder', 'App\Http\Controllers\scorderController@placeorder')->name('scorder.placeorder');
+
