@@ -3,6 +3,16 @@
 <div style="padding-top:1%">
     <nav class="navbar navbar-right navbar-expand-sm navbar-dark bg-dark">
         <ul class="navbar-nav ms-auto">
+            <li class="nav-item" style="margin-right:5px;">
+            <select id="colourselect" class="form-select" size="1">
+                <option value="All">All</option>
+                <option value="Blue">Blue</option>
+                <option value="Red">Red</option>
+                <option value="Green">Green</option>
+                <option value="Yellow">Yellow</option>
+                <option value="Orange">Orange</option>
+            </select>
+        </li>
 
             <li class="nav-item">
                 <button id="checkOut"
@@ -46,7 +56,7 @@
 @include('flash::message')
     <div class='d-flex flex-wrap align-content-start bg-light'>
     @foreach($products as $product)
-        <div class="p-2 border col-4 g-3">
+        <div class="p-2 border col-4 g-3 allcolours {{$product->colour}}">
         <div class="card text-center">
             <div class="card-header d-block"><h5 class="mx-auto d-block">{{ $product->name }} {{ $product->description }}</h5></div>
             <div class="card-body"><img style="width:65%;height:200px;" class="mx-auto d-block" src="{{ asset('/img/' . $product->image)}}"/></div>
@@ -82,6 +92,17 @@ $("#emptycart").click(function() { $.ajax({
         alert("problem communicating with the server");
     }
 });
+});
+
+$("#colourselect").on('change', function() {
+    var colour = $(this).find(":selected").val();
+    if (colour=='All') {
+        $('.allcolours').show();
+    }
+    else {
+        $('.allcolours').hide();
+        $('.'+colour).show();
+    }
 });
 </script>
 @endsection('content')
